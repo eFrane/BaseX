@@ -1,0 +1,27 @@
+{
+    "name": "efrane/base-x",
+    "description": "Convert numbers to and from roman numeric strings.",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "EFrane\\BaseX\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stefan Graupner",
+            "email": "efrane@meanderingsoul.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
