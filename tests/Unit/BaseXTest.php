@@ -14,6 +14,7 @@ class BaseXTest extends TestCase
     public function testToDecimal()
     {
         $this->assertEquals(1, BaseX::toDecimal('I'));
+        $this->assertEquals('ff', BaseX::toDecimal('CCLV', 16));
     }
     
     public function testToRoman()

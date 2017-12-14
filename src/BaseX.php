@@ -22,12 +22,12 @@ class BaseX
         return (new DecimalToRomanConverter())->convert($int);
     }
 
-    public static function toDecimal($string)
+    public static function toDecimal($string, $base = 10)
     {
         if (!is_string($string)) {
             throw new \InvalidArgumentException('Expected roman number literal');
         }
 
-        return (new RomanToDecimalConverter())->convert($string);
+        return base_convert((new RomanToDecimalConverter())->convert($string), 10, $base);
     }
 }
