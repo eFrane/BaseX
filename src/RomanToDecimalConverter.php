@@ -12,9 +12,9 @@ class RomanToDecimalConverter implements ConverterInterface
 {
     const ALLOWED_NEXT = [
         'M' => ['M', 'D', 'C', 'L', 'X', 'V', 'I'],
-        'D' => ['C', 'L', 'X', 'V', 'I'],
+        'D' => ['C'],
         'C' => ['M', 'D', 'C', 'L', 'X', 'V', 'I'],
-        'L' => ['X', 'V', 'I'],
+        'L' => ['X'],
         'X' => ['C', 'L', 'X', 'V', 'I'],
         'V' => ['I'],
         'I' => ['X', 'V', 'I']
