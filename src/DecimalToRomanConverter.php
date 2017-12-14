@@ -23,19 +23,19 @@ class DecimalToRomanConverter implements ConverterInterface
         $number = '';
 
         if ($int >= 1000) {
-            $thousands = intval($int / 1000);
+            $thousands = floor($int / 1000);
             $number .= str_repeat('M', $thousands);
             $int -= 1000 * $thousands;
         }
 
         if ($int >= 100) {
-            $hundreds = intval($int / 100);
+            $hundreds = floor($int / 100);
             $number .= $this->formatSubtractiveLiteral($hundreds, 'C', 'D', 'M');
             $int -= 100 * $hundreds;
         }
 
         if ($int >= 10) {
-            $tens = intval($int / 10);
+            $tens = floor($int / 10);
             $number .= $this->formatSubtractiveLiteral($tens, 'X', 'L', 'C');
             $int -= 10 * $tens;
         }
