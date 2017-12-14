@@ -23,6 +23,8 @@ class DecimalToRomanConverterTest extends TestCase
 
     /**
      * @dataProvider valid
+     * @param $input
+     * @param $output
      */
     public function testConvertValid($input, $output)
     {
@@ -48,6 +50,7 @@ class DecimalToRomanConverterTest extends TestCase
     /**
      * @expectedException \InvalidArgumentException
      * @dataProvider invalid
+     * @param $value
      */
     public function testConvertInvalid($value)
     {
@@ -61,5 +64,40 @@ class DecimalToRomanConverterTest extends TestCase
             ['xlvii'],
             [false],
         ];
+    }
+
+    /**
+     * @dataProvider subtractiveLiterals
+     * @param $result
+     * @param $quotient
+     * @param $lower
+     * @param $middle
+     * @param $upper
+     */
+    public function testFormatSubtractiveLiteral($result, $quotient, $lower, $middle, $upper)
+    {
+        $this->assertEquals($result, $this->sut->formatSubtractiveLiteral($quotient, $lower, $middle, $upper));
+    }
+
+    public function subtractiveLiterals()
+    {
+        return [
+            ['I', 1, 'I', 'V', 'X'],
+            ['II', 2, 'I', 'V', 'X'],
+            ['IV', 4, 'I', 'V', 'X'],
+            ['V', 5, 'I', 'V', 'X'],
+            ['VI', 6, 'I', 'V', 'X'],
+            ['VII', 7, 'I', 'V', 'X'],
+            ['IX', 9, 'I', 'V', 'X'],
+            ['X', 10, 'I', 'V', 'X'],
+        ];
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testFormatSubtractiveLiteralFailsForTooLargeQuotient()
+    {
+        $this->sut->formatSubtractiveLiteral(11, '', '', '');
     }
 }

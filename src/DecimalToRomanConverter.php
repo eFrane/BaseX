@@ -8,8 +8,19 @@
 namespace EFrane\BaseX;
 
 
+/**
+ * DecimalToRomanConverter
+ *
+ * Convert base 10 decimals to their roman numeral equivalent.
+ *
+ * @package EFrane\BaseX
+ */
 class DecimalToRomanConverter implements ConverterInterface
 {
+    /**
+     * @param $int
+     * @return string
+     */
     public function convert($int)
     {
         if (!is_int($int)) {
@@ -50,8 +61,12 @@ class DecimalToRomanConverter implements ConverterInterface
     {
         $formatted = '';
 
-        if ($quotient > 9) {
-            throw new \InvalidArgumentException("Quotient for range check cannot exceed 9");
+        if ($quotient > 10) {
+            throw new \InvalidArgumentException("Quotient for range check cannot exceed 10");
+        }
+
+        if ($quotient == 10) {
+            $formatted .= $upperLiteral;
         }
 
         if ($quotient == 9) {
