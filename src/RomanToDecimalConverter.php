@@ -32,13 +32,6 @@ class RomanToDecimalConverter implements ConverterInterface
     ];
 
     /**
-     * Digits which can cause a subtraction
-     *
-     * @const array
-     */
-    const SUBTRACTIVE_DIGITS = ['C', 'X', 'I'];
-
-    /**
      * Lookup table for when to subtract
      *
      * @const array
@@ -84,7 +77,7 @@ class RomanToDecimalConverter implements ConverterInterface
             }
 
             $signMultiplicator = 1;
-            if (in_array($digit, self::SUBTRACTIVE_DIGITS) &&
+            if (in_array($digit, array_keys(self::LOOKAHEAD_DIGITS)) &&
                 !is_null($nextDigit) && in_array($nextDigit, self::LOOKAHEAD_DIGITS[$digit])
             ) {
                 $signMultiplicator = -1;
