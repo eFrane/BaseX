@@ -22,7 +22,7 @@ class RomanToDecimalConverter implements ConverterInterface
      * @const array
      */
     const ALLOWED_NEXT = [
-        'M' => ['M', 'D', 'C', 'L', 'X', 'V', 'I'],
+        'M' => ['M', 'D', 'C', 'L', 'X', 'V', 'I'], // Note how M contains all other symbols...
         'D' => ['C', 'L', 'X', 'V', 'I'],
         'C' => ['M', 'D', 'C', 'L', 'X', 'V', 'I'],
         'L' => ['X', 'V', 'I'],
@@ -63,7 +63,7 @@ class RomanToDecimalConverter implements ConverterInterface
         for ($i = 0; $i < $numDigits; $i++) {
             $digit = $digits[$i];
 
-            if (!in_array($digit, explode(';', 'I;V;X;L;C;D;M'))) {
+            if (!in_array($digit, self::ALLOWED_NEXT['M'])) {
                 throw new \InvalidArgumentException('Invalid roman number');
             }
 
