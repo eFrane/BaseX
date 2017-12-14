@@ -7,9 +7,20 @@
 
 namespace EFrane\BaseX;
 
-
+/**
+ * RomanToDecimalConverter
+ *
+ * Convert roman numerals to decimal numbers.
+ *
+ * @package EFrane\BaseX
+ */
 class RomanToDecimalConverter implements ConverterInterface
 {
+    /**
+     * Lookup table for allowed next digits of a digit
+     *
+     * @const array
+     */
     const ALLOWED_NEXT = [
         'M' => ['M', 'D', 'C', 'L', 'X', 'V', 'I'],
         'D' => ['C', 'L', 'X', 'V', 'I'],
@@ -20,18 +31,36 @@ class RomanToDecimalConverter implements ConverterInterface
         'I' => ['X', 'V', 'I']
     ];
 
+    /**
+     * Digits which can cause a subtraction
+     *
+     * @const array
+     */
     const SUBTRACTIVE_DIGITS = ['C', 'X', 'I'];
 
+    /**
+     * Lookup table for when to subtract
+     *
+     * @const array
+     */
     const LOOKAHEAD_DIGITS = [
         'C' => ['D', 'M'],
         'X' => ['L', 'C'],
         'I' => ['V', 'X'],
     ];
 
+    /**
+     * Convert a roman numeral into it's decimal form
+     *
+     * @param $digits
+     * @return int
+     * @throws \OutOfBoundsException if the resulting int is larger than PHP_INT_MAX
+     * @throws \InvalidArgumentException for invalid roman numbers
+     */
     public function convert($digits)
     {
         if (!is_string($digits)) {
-            throw new \InvalidArgumentException('Did you mean to use DecimalToRomanConverter?');
+            throw new \InvalidArgumentException('Invalid roman number');
         }
 
         $digits = strtoupper($digits);
