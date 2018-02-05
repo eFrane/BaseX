@@ -7,6 +7,14 @@
 
 namespace EFrane\BaseX;
 
+/**
+ * Interface ConverterInterface
+ * @package EFrane\BaseX
+ */
 interface ConverterInterface {
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function convert($value);
 }

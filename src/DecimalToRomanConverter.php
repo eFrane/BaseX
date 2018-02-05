@@ -57,6 +57,13 @@ class DecimalToRomanConverter implements ConverterInterface
         return $number;
     }
 
+    /**
+     * @param int $quotient
+     * @param string $lowerLiteral
+     * @param string $middleLiteral
+     * @param string $upperLiteral
+     * @return string
+     */
     public function formatSubtractiveLiteral($quotient, $lowerLiteral, $middleLiteral, $upperLiteral)
     {
         $formatted = '';
