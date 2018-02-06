@@ -72,43 +72,69 @@ class RomanToDecimalConverter implements ConverterInterface
                 throw new \InvalidArgumentException('Invalid roman number');
             }
 
-            $signMultiplicator = 1;
-            if (in_array($digit, array_keys(self::LOOKAHEAD_DIGITS)) &&
-                !is_null($nextDigit) && in_array($nextDigit, self::LOOKAHEAD_DIGITS[$digit])
-            ) {
-                $signMultiplicator = -1;
-            }
-
-            $valueToAdd = 0;
-            switch ($digit) {
-                case 'M':
-                    $valueToAdd += 1000;
-                    break;
-                case 'D':
-                    $valueToAdd += 500;
-                    break;
-                case 'C':
-                    $valueToAdd += 100;
-                    break;
-                case 'L':
-                    $valueToAdd += 50;
-                    break;
-                case 'X':
-                    $valueToAdd += 10;
-                    break;
-                case 'V':
-                    $valueToAdd += 5;
-                    break;
-                case 'I':
-                    $valueToAdd = 1;
-                    break;
-                default:
-                    throw new \InvalidArgumentException('Invalid roman number');
-            }
+            $signMultiplicator = $this->determineSign($digit, $nextDigit);
+            $valueToAdd = $this->determineValue($digit);
 
             $convertedValue += $valueToAdd * $signMultiplicator;
         }
 
         return $convertedValue;
+    }
+
+    /**
+     * Determine the sign of the next conversion operation
+     *
+     * @param string $digit
+     * @param string $nextDigit
+     * @return int
+     */
+    protected function determineSign($digit, $nextDigit)
+    {
+        $signMultiplicator = 1;
+        if (in_array($digit, array_keys(self::LOOKAHEAD_DIGITS)) &&
+            !is_null($nextDigit) && in_array($nextDigit, self::LOOKAHEAD_DIGITS[$digit])
+        ) {
+            $signMultiplicator = -1;
+        }
+
+        return $signMultiplicator;
+    }
+
+    /**
+     * Determine the value of the next conversion operation
+     *
+     * @param string $digit
+     * @return int
+     */
+    protected function determineValue($digit)
+    {
+        $valueToAdd = 0;
+        switch ($digit) {
+            case 'M':
+                $valueToAdd += 1000;
+                break;
+            case 'D':
+                $valueToAdd += 500;
+                break;
+            case 'C':
+                $valueToAdd += 100;
+                break;
+            case 'L':
+                $valueToAdd += 50;
+                break;
+            case 'X':
+                $valueToAdd += 10;
+                break;
+            case 'V':
+                $valueToAdd += 5;
+                break;
+            case 'I':
+                $valueToAdd = 1;
+                break;
+            default:
+                throw new \InvalidArgumentException('Invalid roman number');
+        }
+
+        return $valueToAdd;
     }
 }
