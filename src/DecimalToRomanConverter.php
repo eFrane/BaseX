@@ -18,6 +18,8 @@ namespace EFrane\BaseX;
 class DecimalToRomanConverter implements ConverterInterface
 {
     /**
+     * Convert a decimal number to a roman number
+     *
      * @param $int
      * @return string
      */
@@ -58,6 +60,8 @@ class DecimalToRomanConverter implements ConverterInterface
     }
 
     /**
+     * Helper method to format the "double literal"-numbers of Roman notation
+     *
      * @param int $quotient
      * @param string $lowerLiteral
      * @param string $middleLiteral
