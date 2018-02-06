@@ -22,15 +22,16 @@ class DecimalToRomanConverter implements ConverterInterface
      *
      * @param $int
      * @return string
+     * @throws InvalidNumberException
      */
     public function convert($int)
     {
         if (!is_int($int)) {
-            throw new \InvalidArgumentException('Must provide decimal');
+            throw InvalidNumberException::invalidDecimalNumber($int);
         }
 
         if ($int < 1) {
-            throw new \InvalidArgumentException('Decimal must be greater than 0');
+            throw InvalidNumberException::negativeDecimalNumber();
         }
 
         $number = '';
@@ -60,7 +61,13 @@ class DecimalToRomanConverter implements ConverterInterface
     }
 
     /**
-     * Helper method to format the "double literal"-numbers of Roman notation
+     * Helper method to format a bounded section of a roman number
+     *
+     * Roman numbers consist of bounded sections which increase
+     * logarithmically in size. Each section has markers for
+     * it's beginning, middle and end which must be repeated
+     * in a specific manner depending on how many tenths of the
+     * section are to be written down.
      *
      * @param int $quotient
      * @param string $lowerLiteral
@@ -73,7 +80,7 @@ class DecimalToRomanConverter implements ConverterInterface
         $formatted = '';
 
         if ($quotient > 10) {
-            throw new \InvalidArgumentException("Quotient for range check cannot exceed 10");
+            throw InvalidNumberException::quotientRangeCheck();
         }
 
         if ($quotient == 10) {

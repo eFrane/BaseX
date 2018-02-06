@@ -53,7 +53,7 @@ class RomanToDecimalConverter implements ConverterInterface
     public function convert($digits)
     {
         if (!is_string($digits)) {
-            throw new \InvalidArgumentException('Invalid roman number');
+            throw InvalidNumberException::invalidRomanNumber($digits);
         }
 
         $digits = strtoupper($digits);
@@ -69,7 +69,7 @@ class RomanToDecimalConverter implements ConverterInterface
             }
 
             if (!is_null($nextDigit) && !in_array($nextDigit, self::ALLOWED_NEXT[$digit])) {
-                throw new \InvalidArgumentException('Invalid roman number');
+                throw InvalidNumberException::invalidRomanNumber($nextDigit);
             }
 
             $signMultiplicator = $this->determineSign($digit, $nextDigit);
@@ -132,7 +132,7 @@ class RomanToDecimalConverter implements ConverterInterface
                 $valueToAdd = 1;
                 break;
             default:
-                throw new \InvalidArgumentException('Invalid roman number');
+                throw InvalidNumberException::invalidRomanNumber($digit);
         }
 
         return $valueToAdd;
